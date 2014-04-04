@@ -1,30 +1,37 @@
+disabled railway
+================
 
+Compare the railway stations that accessible by pedestrians and wheelchairs. A [leaflet](http://leafletjs.com/) map visualizes the regions where people can get on a train. See the map getting blank when you are on a wheelchair. The data comes from OpenStreetmap's [Overpass API](http://wiki.openstreetmap.org/wiki/Overpass_API).
+
+
+### [click here for the map](http://netaction.github.io/disabled-railway/)
 
 
 Credits
 -------
 
-Open Streetmap
-© OpenStreetMap contributors
 
-Overpass API
-Mapquest Tiles
+**Programming**
+Thomas Schmidt [netAction](https://www.netaction.de/), MIT License
 
-Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">
+**Map data**
+[Open Streetmap](http://www.openstreetmap.org/copyright) contributors, ODbL License
 
-Data, imagery and map information provided by MapQuest, OpenStreetMap <http://www.openstreetmap.org/copyright> and contributors, ODbL
+**Station data**
+[Overpass API](http://wiki.openstreetmap.org/wiki/Overpass_API)
+
+**Mapquest Tiles**
+Tiles imagery Courtesy of [MapQuest](http://www.mapquest.com/)
+
+**Map visualisation**
+[leaflet](http://leafletjs.com/), MIT License
+
+**Framework**
+[jQuery](https://jquery.org/), MIT License
 
 
 
+TODO
+----
 
-Radius 500m
-
-Paris: Nur Seilbahnen und Bahnhöfe für Fernverkehr barrierefrei
-
-
-disabled railway
-	2014 by Thomas netAction Schmidt
-	https://github.com/netAction/disabled-railway
-	MIT License
-
-Erlaube Zoom zu anderen Städten als Berlin
+A nice feature might be direct access to different cities via URL Hash. Let me know if you need this.
