@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- disabled railway
+	2014 by Thomas netAction Schmidt
+	https://github.com/netAction/disabled-railway
+	MIT License -->
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Disabled railway</title>
+
+		<link href="css/railway.css" rel="stylesheet">
+		<link href="css/leaflet.css" rel="stylesheet">
+		<link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon" />
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="media/apple-touch-icon-114x114-precomposed.png" />
+	</head>
+
+	<body>
+		<div id="header">
+			<span id="title">Disabled railway <a href="https://github.com/netAction/disabled-railway">(Credits)</a></span>
+			<span id="selector">stations without wheelchair tag</span>
+		</div>
+		<div id="map"></div>
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/leaflet.js"></script>
+		<script>
+// Global vars
+var map;
+var stationsMissingWheelchair = L.layerGroup();
+var ajaxRequest;
+
+function drawStations() {
+	var bounds = map.getBounds();
+
+	var query =
+		'[out:json]\n'+
+		'[timeout:5];\n'+
+		'node\n'+
+		'  ["railway"="station"]\n'+
+		'  ('+
+			bounds._southWest.lat+','+
+			bounds._southWest.lng+','+
+			bounds._northEast.lat+','+
+			bounds._northEast.lng+
+		');\n'+
+		'out 1000;';
+
+	var query =
+		'https://www.overpass-api.de/api/interpreter?'+
+		'data='+encodeURIComponent(query)+
+		'&jsonp=?';
+
+	if (ajaxRequest) {
+		ajaxRequest.abort();
+	}
+	ajaxRequest = $.getJSON(query, function(data) {
+		ajaxRequest = false;
+		stationsForEveryone.clearLayers();
+		stationsNoWheelchair.clearLayers();
+
+		$.each(data.elements,function() {
+			if (!this.tags.wheelchair) {
+				L.marker([this.lat, this.lon])
+					.bindPopup(this.tags.name)
+					.addTo(list);
+			}
+		});
+
+		if (!data.elements.length) {
+			console.log("Please zoom in.");
+		}
+	});
+} // drawStations
+
+
+function initMap() {
+	map = L
+		.map('map',{
+			zoomControl:false,
+			layers: [stationsForEveryone,stationsNoWheelchair]
+		})
+			.setView([52.52,13.41], 12);
+	map.attributionControl.setPrefix("");
+	// Black White map
+	L.tileLayer('https://otile1-s.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
+			attribution: '',
+			maxZoom: 15,
+			minZoom:4
+	}).addTo(map);
+
+	// Trigger station overlay.
+	// A better solution might be https://gist.github.com/pkorac/5287314
+	map.on('moveend', function() {
+		drawStations();
+	});
+	drawStations();
+} // initMap
+initMap();
+
+</script>
+	</body>
+</html>
