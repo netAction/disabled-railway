@@ -57,14 +57,13 @@ function drawStations() {
 	}
 	ajaxRequest = $.getJSON(query, function(data) {
 		ajaxRequest = false;
-		stationsForEveryone.clearLayers();
-		stationsNoWheelchair.clearLayers();
+		stationsMissingWheelchair.clearLayers();
 
 		$.each(data.elements,function() {
 			if (!this.tags.wheelchair) {
 				L.marker([this.lat, this.lon])
 					.bindPopup(this.tags.name)
-					.addTo(list);
+					.addTo(stationsMissingWheelchair);
 			}
 		});
 
@@ -79,7 +78,7 @@ function initMap() {
 	map = L
 		.map('map',{
 			zoomControl:false,
-			layers: [stationsForEveryone,stationsNoWheelchair]
+			layers: [stationsMissingWheelchair]
 		})
 			.setView([52.52,13.41], 12);
 	map.attributionControl.setPrefix("");
