@@ -30,6 +30,12 @@
 var map;
 var stationsMissingWheelchair = L.layerGroup();
 var ajaxRequest;
+var pedestrianIcon = L.icon({
+    iconUrl: 'media/pedestrian.png',
+    iconSize:     [341, 575], // size of the icon
+    iconAnchor:   [150, 50], // point of the icon which will correspond to marker's location
+    popupAnchor:  [150, 50] // point from which the popup should open relative to the iconAnchor
+});
 
 function drawStations() {
 	var bounds = map.getBounds();
@@ -61,7 +67,7 @@ function drawStations() {
 
 		$.each(data.elements,function() {
 			if (!this.tags.wheelchair) {
-				L.marker([this.lat, this.lon])
+				L.marker([this.lat, this.lon],{icon:pedestrianIcon})
 					.bindPopup(this.tags.name)
 					.addTo(stationsMissingWheelchair);
 			}
