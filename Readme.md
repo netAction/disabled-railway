@@ -20,3 +20,11 @@ Data, imagery and map information provided by MapQuest, OpenStreetMap <http://ww
 Radius 500m
 
 Paris: Nur Seilbahnen und Bahnhöfe für Fernverkehr barrierefrei
+
+
+disabled railway
+	2014 by Thomas netAction Schmidt
+	https://github.com/netAction/disabled-railway
+	MIT License
+
+Erlaube Zoom zu anderen Städten als Berlin

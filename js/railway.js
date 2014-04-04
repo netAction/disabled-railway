@@ -1,3 +1,10 @@
+/*
+	disabled railway
+	2014 by Thomas netAction Schmidt
+	https://github.com/netAction/disabled-railway
+	MIT License
+*/
+
 // Global vars
 var map;
 var stationsForEveryone = L.layerGroup();
@@ -58,8 +65,7 @@ function drawStations() {
 			console.log("Please zoom in.");
 		}
 	});
-
-}
+} // drawStations
 
 
 function initMap() {
@@ -68,7 +74,6 @@ function initMap() {
 			zoomControl:false,
 			layers: [stationsForEveryone,stationsNoWheelchair]
 		})
-			// TODO: Zoom to Berlin and other cities
 			.setView([52.52,13.41], 12);
 	map.attributionControl.setPrefix("");
 	// Black White map
@@ -84,8 +89,9 @@ function initMap() {
 		drawStations();
 	});
 	drawStations();
-}
+} // initMap
 initMap();
+
 
 $('#pedbutton').click(function() {
 	if (map.hasLayer(stationsNoWheelchair)==false) {
