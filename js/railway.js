@@ -77,7 +77,7 @@ function initMap() {
 			.setView([52.52,13.41], 12);
 	map.attributionControl.setPrefix("");
 	// Black White map
-	L.tileLayer('https://otile1-s.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
+	L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}@2x.png', {
 			attribution: '',
 			maxZoom: 15,
 			minZoom:4
